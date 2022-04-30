@@ -8,34 +8,38 @@
 </head><script>  
 
 document.addEventListener("DOMContentLoaded", function() {
-    // nasłuchiwuje czy dokument się wczytał
-
+// Czekamy na wczytanie dokumentu
 var input1 = document.getElementById('pole1');
+// Przypisujemy input o id pole1 do zmiennej input1
 var input2 = document.getElementById('pole2');
-    // deklaracja inputów do "pole1" i "pole2"
-
+// Przypisujemy input o id pole2 do zmiennej input2
 input1.addEventListener('change', updateValue);
+// Uruchamiamy updatevalue, kiedy zmieni się coś w polu1
 input2.addEventListener('change', updateValue);
-    // aktualizuje zmiany wartości inputów
+// Uruchamiamy updatevalue, kiedy zmieni się coś w polu2
 
+
+
+// Definiujemy funkcję, która przyjmuje 2 argumenty
 function dodawanie(liczba1,liczba2) {
-    // funkcja dodawania
 
   log = document.getElementById("box");
-  // przypisanie log id = "box"
+//   Przypisujemy div o id box do zmiennej log
   console.log(liczba1);
   console.log(liczba2);
-  // wyświetla w consoli "liczba1" i "liczba2"
-  log.textContent = liczba1 + liczba2;
-  // box(wynik) = "liczba1" + "liczba2"
-
+  log.textContent = liczba1 + liczba2 ;
+// Do środka diva o id box wyswietlamy sume zmiennych
 }; 
 
 function updateValue(e) {
+    console.log (e.target.value);
+    // Wyświetlanie wartosci jaka trafi do funkcji z pól nadsłuchiwanych
      pole1 = Number(document.getElementById('pole1').value);
+     // Pobieranie wartości z pola html input o id pole1 i zamiana na wartość liczbową
      pole2 = Number(document.getElementById('pole2').value);
-     // wyswietla wartość funkcji pól
+       // Pobieranie wartości z pola html input o id pole2 i zamiana na wartość liczbową
     dodawanie(pole1,pole2);
+//  Wykonywanie funkcji dodawanie
 }
 
 
@@ -45,8 +49,9 @@ function updateValue(e) {
 <body>    
 
     <input id="pole1" type="text" />+
+
+    
     <input id="pole2" type="text" /> 
-        
     =    <div id="box"></div>
 </body>
 </html> 
