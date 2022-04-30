@@ -4,26 +4,49 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strona o kotach</title>
-    <script>
-        liczba1="3";
-        liczba2=3;
-        liczba3=liczba1+liczba2;
-        hello="Hello World";
-        console.log(hello);
-        document.addEventListener("DOMContentLoaded", function() {
-        const input = document.getElementById("field");
-        const log = document.getElementById("box");
-        input.addEventListener('change', updateValue);
-        function updateValue(e) {
-            log.textContent = e.target.value;}
-        });
-    </script>
-</head>
-<body>
-    <div id="box">
-    </div>
-    <input id="field">
-    </input>
+    <title>Document</title>
+</head><script>  
+
+document.addEventListener("DOMContentLoaded", function() {
+    // nasłuchiwuje czy dokument się wczytał
+
+var input1 = document.getElementById('pole1');
+var input2 = document.getElementById('pole2');
+    // deklaracja inputów do "pole1" i "pole2"
+
+input1.addEventListener('change', updateValue);
+input2.addEventListener('change', updateValue);
+    // aktualizuje zmiany wartości inputów
+
+function dodawanie(liczba1,liczba2) {
+    // funkcja dodawania
+
+  log = document.getElementById("box");
+  // przypisanie log id = "box"
+  console.log(liczba1);
+  console.log(liczba2);
+  // wyświetla w consoli "liczba1" i "liczba2"
+  log.textContent = liczba1 + liczba2;
+  // box(wynik) = "liczba1" + "liczba2"
+
+}; 
+
+function updateValue(e) {
+     pole1 = Number(document.getElementById('pole1').value);
+     pole2 = Number(document.getElementById('pole2').value);
+     // wyswietla wartość funkcji pól
+    dodawanie(pole1,pole2);
+}
+
+
+});
+
+</script>
+<body>    
+
+    <input id="pole1" type="text" />+
+    <input id="pole2" type="text" /> 
+        
+    =    <div id="box"></div>
 </body>
-</html>
+</html> 
