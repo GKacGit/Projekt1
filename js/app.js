@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
       reset.disabled = false;
       tabela.removeEventListener("click", gra);
       winner = document.getElementById("winner")
-      winner.textContent = "Zwycięzca: -"
+      winner.textContent = "Brak wygranego"
     }
     reset = document.getElementById("reset");
     reset.addEventListener("click", resetGame)
@@ -65,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
             getElementP(par3,"x");
             getResult("Wygrywa krzyżyk");
           }
+
         if (kto == "ooo") {
             getElementP(par1,"o");
             getElementP(par2,"o");
@@ -75,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
         tabela.removeEventListener("click",gra);
         }
     }
+
     // funkcja ktora podstawia parametry pod wygrana
     wynik = [];
     wynik[1] = 'xxx';
@@ -89,6 +91,7 @@ document.addEventListener("DOMContentLoaded", function() {
         wygranaGry(6,wynik[x],3,6,9);
         wygranaGry(7,wynik[x],1,5,9);
         wygranaGry(8,wynik[x],3,5,7);
-    }    
+    }
+
   };
   });
