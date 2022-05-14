@@ -2,7 +2,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 tabelka.addEventListener("click",gra);
-firstMove = '<img class="image" src="/img/czarne_x.png"/>';
+  firstMove = '<img class="image" src="/img/czarne_x.png"/>';
+  nameField = 'x';
 numberMove = 0 ;
 p=[];
 wygrana=[];
@@ -12,14 +13,15 @@ function gra(e){
   targetId = document.getElementById(e.target.id);
   if (targetId.innerHTML == "") {
     targetId.innerHTML = firstMove;
-  
+   targetId.setAttribute("name",nameField);
  
   if(firstMove == '<img class="image" src="/img/czarne_x.png"/>'){
     firstMove = '<img class="image" src="/img/czarne_o.png"/>';
+    nameField = 'o';
   }
   else {
     firstMove = '<img class="image" src="/img/czarne_x.png"/>';
-  
+  nameField = 'x';
   }}
   reset = document.getElementById("reset");
   reset.addEventListener("click",resetGame)
@@ -32,8 +34,13 @@ function resetGame(e){
   numberMove=0;
 }
 
-for(x=1;x<10;x++){
-  p[x]=document.getElementById("p"+x).innerHTML;
+  for (x = 1; x < 10; x++){
+    //console.log(document.getElementById("p" + x).getAttribute("name"));
+    if (document.getElementById("p" + x).getAttribute("name")) {
+      p[x] = document.getElementById("p" + x).getAttribute("name");
+    } 
+    
+  console.log(p[x]);
 }
 //p1=document.getElementById("p1").innerHTML;
 //p2=document.getElementById("p2").innerHTML;
@@ -54,7 +61,8 @@ for(x=1;x<10;x++){
 // wygrana8=p[3]+p[5]+p[7];
 
 function getElementP(elem,what) {
-    document.getElementById("p"+elem).innerHTML = '<div style="color:#00cc00">'+what+'</div>'
+    document.getElementById("p"+elem).innerHTML = '<img class="image" src="/img/'+what+'"/>'
+  
   }
   //funkcja pozwala na przypisanie koloru do pola o danej wartości i ustaleniu symbolu wygranego
   function getResult(info) {
@@ -66,7 +74,7 @@ function getElementP(elem,what) {
       //par1 - pierwsze pole z elementów które tworzą wygraną, par2 - drugie z elementów -||-, par3 trzecie z elementów -||-,
     wygrana[x]=p[par1] + p[par2] + p[par3];
     //wygrana x - definiuje konfigurację wygranej
-    //console.log(wygrana[x]);
+    console.log("wygran:"+wygrana[x]);
       if (wygrana[x]== kto){
       //czy konfiguracja wygrana zgadza się z symbolem
         if (kto == "xxx") {
