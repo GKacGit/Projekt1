@@ -1,105 +1,81 @@
-document.addEventListener("DOMContentLoaded", function() {
-    tabela.addEventListener("click", gra);
+repeatElements = [];
 
-    firstMove = '<img class="image" src="/img/x.png" />';
-    numberOfMove = 0;
-    nameField = "x";
-    wygrywaO = 0;
-    wygrywaX = 0;
-    document.getElementById("statystyki").innerHTML = "Krzyżyki: " +wygrywaX+ "<br/>Kółka: " +wygrywaO +"";
+function checkElement(event) {
 
-    function resetGame() {
-        for (x = 1; x < 10; x++) {
-            document.getElementById("p" + x).innerHTML = "";
-            document.getElementById("p" + x).setAttribute("name", "");
+    if (event.keyCode == 13) {
+        // console.log(event.target.value);
+        if (pierwiastki[losuj][1] == event.target.value) {
+            //console.log("dobrze");
+            pierwiastek[losuj].parentElement.classList.remove("checked");
+            pierwiastek[losuj].parentElement.classList.add("goodAnswer");
+
+
+        } else {
+            // console.log("źle");
+            pierwiastek[losuj].parentElement.classList.remove("checked");
+            pierwiastek[losuj].parentElement.classList.add("badAnswer");
+
+
         }
-        reset.disabled = true;
-        tabela.addEventListener("click", gra);
-        numberOfMove = 0;
-        winner = document.getElementById("winner")
-        winner.textContent = ""
+        game();
     }
 
-    p = [];
-    wygrana = [];
 
-    function gra(e) {
-        numberOfMove++;
-        //console.log(e.target.id);
-        targetId = document.getElementById(e.target.id)
-        if (targetId.innerHTML == "") {
-            targetId.innerHTML = firstMove;
-            targetId.setAttribute("name", nameField)
-            if (firstMove == '<img class="image" src="/img/x.png" />') {
-                firstMove = '<img class="image" src="/img/o.png" />';
-                nameField = "o";
-            } else {
-                firstMove = '<img class="image" src="/img/x.png" />';
-                nameField = "x";
-            }
-        }
-        if (numberOfMove == 9) {
-            reset.disabled = false;
-            tabela.removeEventListener("click", gra);
-            winner = document.getElementById("winner")
-            winner.textContent = "Brak wygranego"
-        }
-        reset = document.getElementById("reset");
-        reset.addEventListener("click", resetGame)
-        for (x = 1; x < 10; x++) {
-            p[x] = document.getElementById("p" + x).getAttribute("name");
-        }
+}
 
-        function getElementP(elem, what) {
-            document.getElementById("p" + elem).innerHTML = '<img class="image" src="/img/' + what + '_green.png" />';
-        }
-        // kolorowanie kółek, krzyżyków
-        function getResult(info) {
-            document.getElementById("winner").innerHTML = info;
-        }
-        // funkcja ktora przekazuje parametr info do elementu o id winner
-        function wygranaGry(x, kto, par1, par2, par3) {
-            wygrana[x] = p[par1] + p[par2] + p[par3];
-            //console.log(wygrana[x]);
-            if (wygrana[x] == kto) {
-                if (kto == "xxx") {
-                    getElementP(par1, "x");
-                    getElementP(par2, "x");
-                    getElementP(par3, "x");
-                    getResult("Wygrywa krzyżyk");
 
-                    wygrywaX++;
+container = document.getElementsByClassName("symbol");
+// console.log(container);
+pierwiastek = [];
+y = 0;
+for (x = 0; x < container.length; x++) {
+    // console.log(container[x].innerHTML);
+    if (container[x].textContent != 'DE' && container[x].textContent != 'DEL' && container[x].textContent != '57-71' && container[x].textContent != '89-103') {
+        // console.log(container[x]);
+        pierwiastek[y] = container[x];
+
+        console.log(y + "-" + pierwiastek[y].textContent);
+        y++;
+    }
+}
+
+function game() {
+
+    if (repeatElements.length >= pierwiastki.length) {
+
+    } else {
+        console.log(pierwiastki.length)
+        console.log(repeatElements.length)
+        losuj = Math.floor(Math.random() * pierwiastki.length);
+        // console.log(pierwiastki[losuj]);
+
+        if (repeatElements.includes(losuj)) {
+
+            //  console.log("powtorzylem:"+pierwiastek[losuj].textContent);
+            game();
+        } else {
+
+            for (x = 0; x < pierwiastek.length; x++) {
+                //iteruje x dopóki nie jest zgodny z numerem pierwiastka
+                // console.log(container[x].textContent)
+                //wyświetla w konsoli symbol pierwiastka (np.Na) 
+                // console.log(pierwiastek[losuj])
+                // wyświetla wylosowany pieriwastek w konsoli
+
+                // console.log("nazwa:"+pierwiastek[x].textContent);
+                // console.log("wylosowany:"+pierwiastki[losuj][0]);
+
+                if (pierwiastek[x].textContent == pierwiastki[losuj][0]) {
+                    //sprawdza czy wylosowany x jest zgodny z numerem pierwiastka
+                    // console.log(pierwiastek[losuj]);
+                    pierwiastek[x].parentElement.classList.add("checked");
+                    //podświetla wylosowany pieriwastek, dodaje go do listy klas 
                 }
 
-                if (kto == "ooo") {
-                    getElementP(par1, "o");
-                    getElementP(par2, "o");
-                    getElementP(par3, "o");
-                    getResult("Wygrywa kółko");
-
-                    wygrywaO++;
-                }
-                document.getElementById("statystyki").innerHTML = "Krzyżyki: " +wygrywaX+ "<br/>Kółka: " +wygrywaO+ "";
-                reset.disabled = false;
-                tabela.removeEventListener("click", gra);
             }
+            repeatElements.push(losuj)
         }
 
-        // funkcja ktora podstawia parametry pod wygrana
-        wynik = [];
-        wynik[1] = 'xxx';
-        wynik[2] = 'ooo';
-
-        for (x = 1; x < 3; x++) {
-            wygranaGry(1, wynik[x], 1, 2, 3);
-            wygranaGry(2, wynik[x], 4, 5, 6);
-            wygranaGry(3, wynik[x], 7, 8, 9);
-            wygranaGry(4, wynik[x], 1, 4, 7);
-            wygranaGry(5, wynik[x], 2, 5, 8);
-            wygranaGry(6, wynik[x], 3, 6, 9);
-            wygranaGry(7, wynik[x], 1, 5, 9);
-            wygranaGry(8, wynik[x], 3, 5, 7);
-        }
-
-    };
-});
+    }
+}
+game();
