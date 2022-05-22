@@ -2,6 +2,11 @@
     display: flex;
 }
 
+body {
+    background-image: url('https://i.lensdump.com/i/8GUtVK.jpg');
+    background-color: black;
+}
+
 .center {
     text-align: center;
     padding: 15px;
