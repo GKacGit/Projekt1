@@ -48,6 +48,7 @@ function checkElement(event) {
             // zaznaczanie źle nazwanego pierwiastka na czerwono
 
         }
+        event.target.value = ""
         game();
     }
 }
