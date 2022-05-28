@@ -1,17 +1,4 @@
-.button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 12px;
-  }
-  #resetBtn {
+#resetBtn {
       border: 2px solid grey ;
       background-color: #4c7683;
       color: white ;
