@@ -7,7 +7,7 @@ for (x = 0; x < container.length; x++) {
         emelentsSymbols[y] = container[x];
         // wykluczanie niewidzialnych divów i niepotrzebnych kafelków
 
-        console.log(y + "-" + emelentsSymbols[y].textContent);
+        //console.log(y + "-" + emelentsSymbols[y].textContent);
         // wyświetlanie numeru pierwiastka i jego skrót w konsoli
         y++;
     }
@@ -17,6 +17,9 @@ game();
 function game() {
     if (repeatElements.length >= elements.length) {
         console.log("koniec gry");
+        
+        clearInterval(timerX);
+        document.getElementById("timer").innerHTML = "Koniec Gry!";
         // wyświetlanie "koniec gry" w konsoli
     } else {
         randomElement = Math.floor(Math.random() * elements.length);
@@ -40,13 +43,14 @@ function checkElement(event) {
             emelentsSymbols[randomElement].parentElement.classList.remove("checked");
             // zaznaczanie wylosowanego pierwiastka na różowo
             emelentsSymbols[randomElement].parentElement.classList.add("goodAnswer");
+            countDownDate = new Date().getTime()+10*1100;
             // zaznaczanie poprawnie nazwanego pierwiastka na zielono
         } else {
             emelentsSymbols[randomElement].parentElement.classList.remove("checked");
             // zaznaczanie wylosowanego pierwiastka na różowo
             emelentsSymbols[randomElement].parentElement.classList.add("badAnswer");
             // zaznaczanie źle nazwanego pierwiastka na czerwono
-
+            countDownDate = new Date().getTime()+10*1100;
         }
         event.target.value = ""
         game();
