@@ -1,3 +1,22 @@
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+  }
+  #resetBtn {
+      border: 2px solid grey ;
+      background-color: #4c7683;
+      color: white ;
+      font-size: 40px;
+  }
 #timer {
     margin: auto;
     text-align:center;
@@ -35,7 +54,9 @@
       -10px 10px 0px #4c7683,
       -15px 15px 25px rgba(0,0,0,.9);
   }
-
+#resetbtn {
+    display: none;
+}
 .container {
     display: flex;
 }

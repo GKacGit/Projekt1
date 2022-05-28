@@ -26,9 +26,12 @@ function game() {
         // losowanie liczy z tablicy pierwiastków
         if (repeatElements.includes(randomElement)) {
             // sprawdza czy wylosowana liczba zawiera sie w tablicy powtórzonych pierwiastków
+          //console.log(repeatElements);
+          //console.log(randomElement);
             game();
         } else {
             emelentsSymbols[randomElement].parentElement.classList.add("checked");
+            
             // zaznaczanie wylosowanego pierwiastka na różowo
             repeatElements.push(randomElement)
         }
@@ -43,16 +46,36 @@ function checkElement(event) {
             emelentsSymbols[randomElement].parentElement.classList.remove("checked");
             // zaznaczanie wylosowanego pierwiastka na różowo
             emelentsSymbols[randomElement].parentElement.classList.add("goodAnswer");
-            countDownDate = new Date().getTime()+10*1100;
+            countDownDate = countDownDate+5*1000;
             // zaznaczanie poprawnie nazwanego pierwiastka na zielono
         } else {
             emelentsSymbols[randomElement].parentElement.classList.remove("checked");
             // zaznaczanie wylosowanego pierwiastka na różowo
             emelentsSymbols[randomElement].parentElement.classList.add("badAnswer");
             // zaznaczanie źle nazwanego pierwiastka na czerwono
-            countDownDate = new Date().getTime()+10*1100;
+            countDownDate = countDownDate-5*1000;
         }
         event.target.value = ""
         game();
     }
 }
+
+resetBtn.addEventListener("click",resetFunction);
+
+function resetFunction(){
+    //console.log("dziala");
+    for (x =0 ; x < emelentsSymbols.length ; x++){
+        repeatElements = [];
+        emelentsSymbols[x].parentElement.classList.remove("checked");
+        emelentsSymbols[x].parentElement.classList.remove("goodAnswer");
+        emelentsSymbols[x].parentElement.classList.remove("badAnswer");
+    }
+    countDownDate = new Date().getTime()+120*1000;
+    game();
+    timerX = setInterval(timerFunction, 1000);
+    resetBtn.style.display = "none" ;
+    myInput.style.display = "block";
+}
+reset = document.getElementById("reset");
+resetBtn.addEventListener("click", resetFunction)
+resetBtn.style.display="none";
