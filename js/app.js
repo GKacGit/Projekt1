@@ -2,6 +2,8 @@ var repeatElements = [];
 container = document.getElementsByClassName("symbol");
 emelentsSymbols = [];
 y = 0;
+tempTime = 0;
+var timeStoped = 0 ;
 for (x = 0; x < container.length; x++) {
     if (container[x].textContent != 'DE' && container[x].textContent != 'DEL' && container[x].textContent != '57-71' && container[x].textContent != '89-103') {
         emelentsSymbols[y] = container[x];
@@ -40,6 +42,14 @@ function game() {
 
 function checkElement(event) {
     if (event.keyCode == 13) {
+        if (timeStoped != 0){
+            console.log(timeStoped); 
+            console.log(timeTimer); 
+            countDownDate = new Date().getTime() + (timeTimer) - timeStoped;
+            console.log(countDownDate); 
+            console.log(new Date().getTime()); 
+            timerX = setInterval(timerFunction, 1000);
+        }
         // jeżeli enter zostanie kliknięty wokonaj
         if (event.target.value == elements[randomElement][1]) {
             // jeżeli pierwiastek został wylosowany
@@ -47,6 +57,7 @@ function checkElement(event) {
             // zaznaczanie wylosowanego pierwiastka na różowo
             emelentsSymbols[randomElement].parentElement.classList.add("goodAnswer");
             countDownDate = countDownDate+5*1000;
+            document.getElementsByClassName("slideshow-container-all")[0].style.display = "block";
             // zaznaczanie poprawnie nazwanego pierwiastka na zielono
         } else {
             emelentsSymbols[randomElement].parentElement.classList.remove("checked");
@@ -81,10 +92,6 @@ resetBtn.addEventListener("click", resetFunction)
 resetBtn.style.display="none";
 
 
-
-
-
-
 let slideIndex = 1;
 showSlides(slideIndex);
 
@@ -97,7 +104,7 @@ function currentSlide(n) {
 }
 
 function showSlides(n) {
-    console.log("dziala");
+    //console.log("dziala");
   let i;
   let slides = document.getElementsByClassName("mySlides");
   let dots = document.getElementsByClassName("dot");
@@ -111,4 +118,45 @@ function showSlides(n) {
   }
   slides[slideIndex-1].style.display = "block";  
   dots[slideIndex-1].className += " active";
+
+
 }
+
+if (emelentsSymbols[randomElement].parentElement.classList == ("goodAnswer")){
+    document.getElementsByClassName("slideshow-container");
+    
+}
+
+document.getElementById("skip").addEventListener("click", photoclick1);
+
+function photoclick1(){
+console.log("Pierwiastek zostal pominiety");
+emelentsSymbols[randomElement].parentElement.classList.remove("checked");
+emelentsSymbols[randomElement].parentElement.classList.add("goodAnswer");
+countDownDate = countDownDate+5*1000;
+game();
+document.getElementsByClassName("slideshow-container-all")[0].style.display = "none";
+}
+
+
+document.getElementById("stop").addEventListener("click", photoclick2);
+
+function photoclick2(){
+console.log("Czas zostal zatrzymany");
+now = new Date().getTime() + timeTimer;
+timeStoped = now - countDownDate ;
+console.log(timeStoped);
+
+clearInterval(timerX);
+document.getElementsByClassName("slideshow-container-all")[0].style.display = "none";
+}
+
+
+document.getElementById("addTime").addEventListener("click", photoclick3);
+
+function photoclick3(){
+console.log("Czas zostal dodany o 30s");
+countDownDate = countDownDate+30*1000;
+document.getElementsByClassName("slideshow-container-all")[0].style.display = "none";
+}
+document.getElementsByClassName("slideshow-container-all")[0].style.display = "none";

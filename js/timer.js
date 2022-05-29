@@ -1,4 +1,6 @@
-var countDownDate = new Date().getTime()+120*1000;
+
+var timeTimer = 120*1000;
+var countDownDate = new Date().getTime()+timeTimer;
 
 // Update the count down every 1 second
 var timerX = setInterval(timerFunction, 1000);
